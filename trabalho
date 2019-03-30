@@ -1,0 +1,94 @@
+async function (){
+    var mesAno=08;
+    var codigoIbge = [];
+    let jsonToSend = [];
+    $.ajax({
+        url: `http://www.transparencia.gov.br/api-de-dados/bolsa-familia-por-municipio?mesAno=${mesAno}&codigoIbge=${codigoIbge}&pagina=1`,
+        method: 'GET',
+        contentType: 'application/json',
+        async: true, 
+        data: JSON.stringify(jsonToSend),
+        async: true,        
+        success: function (success) {
+          modal.style.display = 'none'
+          console.log('----DATA-----')
+          console.log('success', data)
+          $('#totalRegistros').html(data.length)
+          console.log(data.length)
+          for (let i = 0, p = Promise.resolve(); i < data.length; i = i + 100) {
+            var progress_bar_id = '#progress-wrp2'
+            let percent = ((100 * (i + 100)) / (data.length - 1)).toFixed(2)
+            let arrayFinal = []
+            for (let y = i; y < i + 100; y++) {
+              if (data[y] !== undefined) {
+                console.log('DATA Y')
+                console.log(data[y])
+                arrayFinal.push(data[y])
+              }
+            }
+}
+/*
+
+$.ajax({
+    type: 'POST',
+    url: `http://${globalVars.ambiente.hostnameWeb}:${
+      globalVars.ambiente.portWeb
+    }/Gamification/uploadNPS`,
+    xhr: function () {
+      var myXhr = $.ajaxSettings.xhr()
+      if (myXhr.upload) {
+        myXhr.upload.addEventListener('progress', that.progressHandling, false)
+        console.log(`uhuuu---`)
+       
+      }
+      return myXhr
+    },
+ 
+    success: function (data) {
+      modal.style.display = 'block'
+      dataPreSave = data[0]
+      let jsonToSend = [];
+      jsonToSend.push(data[0]);
+      console.log(`excel`, data[0]);
+      $.ajax({
+        url: `http://${globalVars.ambiente.hostnameApi}:${
+          globalVars.ambiente.portApi
+        }/api/RelatorioNps/preSave`,
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(jsonToSend),
+        async: true,
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader('Authorization', 'Basic ZWE5NTY2Og==')
+        },
+        
+        success: function (success) {
+          modal.style.display = 'none'
+          console.log('----DATA-----')
+          console.log('success', data)
+          $('#totalRegistros').html(data.length)
+          console.log(data.length)
+          for (let i = 0, p = Promise.resolve(); i < data.length; i = i + 100) {
+            var progress_bar_id = '#progress-wrp2'
+            let percent = ((100 * (i + 100)) / (data.length - 1)).toFixed(2)
+            let arrayFinal = []
+            for (let y = i; y < i + 100; y++) {
+              if (data[y] !== undefined) {
+                console.log('DATA Y')
+                console.log(data[y])
+                arrayFinal.push(data[y])
+              }
+            }
+            console.log('ARRAY FINAL')
+            console.log(arrayFinal)
+            console.log('Array final ->', arrayFinal)
+            p = p.then(_ =>
+              new Promise((resolve, reject) => {
+                const element = data[i]
+                console.log('ULTIMA')
+                $.ajax({
+                  url: `http://${globalVars.ambiente.hostnameApi}:${
+                    globalVars.ambiente.portApi
+                  }/api/RelatorioNps/save`,
+                  // url: 'http://g300603ws099:8080/api/sloRelatorioTemp/save',
+                  method: 'POST', */
